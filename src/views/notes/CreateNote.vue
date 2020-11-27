@@ -63,6 +63,7 @@
 <script>
 import { VueEditor } from "vue3-editor";
 import axios from "axios";
+
 export default {
   components: { VueEditor },
   data() {
@@ -78,6 +79,7 @@ export default {
   },
   created() {
     this.$store.dispatch("notes/loadClassificationList");
+    this.$store.dispatch("notes/loadImgurToken");
   },
   computed: {
     classificationList() {
@@ -131,14 +133,14 @@ export default {
     handleImageAdded(file, Editor, cursorLocation) {
       var formData = new FormData();
       formData.append("image", file);
-
+      const imgurToken = this.$store.state.notes.imgurToken;
       axios({
         crossDomain: true,
         // processData: false,
         url: "https://api.imgur.com/3/image",
         method: "POST",
         headers: {
-          Authorization: "Bearer " + "8bd7daae37cf9fb74478f58dd1c8c4f629d7fa92",
+          Authorization: "Bearer " + imgurToken,
         },
         data: formData,
       })

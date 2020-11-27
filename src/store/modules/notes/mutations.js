@@ -32,4 +32,7 @@ export default {
   setClassidicationList(state, payload) {
     state.classificationList = payload;
   },
+  setImgurToken(state, payload) {
+    state.imgurToken = payload;
+  },
 };

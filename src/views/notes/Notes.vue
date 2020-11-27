@@ -19,6 +19,10 @@
         <loading-spinner v-if="isLoading"></loading-spinner>
         <div v-if="isAdmin">
           <base-button type="button" @click="goCreateNote">New Note</base-button>
+          <div>
+            <input type="text" v-model="token" />
+            <base-button type="button" @click="updateToken">Update Token</base-button>
+          </div>
         </div>
         <div v-if="!isLoading">
           <ul id="noteList">
@@ -53,6 +57,7 @@ export default {
       isLoading: false,
       filteredClassification: "All Notes",
       isOpen: false,
+      token: "",
     };
   },
   computed: {
@@ -156,6 +161,11 @@ export default {
     },
     toggleOpen() {
       this.isOpen = !this.isOpen;
+    },
+    async updateToken() {
+      await this.$store.dispatch("notes/updateImgurToken", this.token);
+      this.token = "";
+      console.log("Token has been updated");
     },
   },
 };

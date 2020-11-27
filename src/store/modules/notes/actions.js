@@ -104,4 +104,24 @@ export default {
 
     context.commit("setClassidicationList", payload);
   },
+  async updateImgurToken(context, payload) {
+    //payload is new token
+    await fb
+      .database()
+      .ref("imgurToken/")
+      .set(payload);
+
+    context.commit("setImgurToken", payload);
+  },
+  async loadImgurToken(context) {
+    var token;
+    await fb
+      .database()
+      .ref("imgurToken/")
+      .once("value", function(snapshot) {
+        token = snapshot.val();
+      });
+    console.log(token);
+    context.commit("setImgurToken", token);
+  },
 };
