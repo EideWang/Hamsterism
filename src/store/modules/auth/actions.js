@@ -6,7 +6,7 @@ export default {
     const user = await fb.auth().currentUser;
 
     //設定有效維持登入的時間
-    const expiresIn = 3600000; //毫秒 ==>60mins
+    const expiresIn = 28800000; //毫秒 ==>480mins
     const expirationDate = new Date().getTime() + expiresIn;
 
     //自動登出計時函數
